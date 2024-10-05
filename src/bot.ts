@@ -31,7 +31,7 @@ client.on(Events.MessageCreate, (message) => {
 });
 
 client.on(Events.MessageCreate, async (message) => {
-  const prefix = 'get pokemon ';
+  const prefix = '!get pokemon ';
   if (message.content.toLocaleLowerCase().startsWith(prefix)) {
     const pokemonId: any = message.content.slice(prefix.length).trim();
     if (!isNaN(pokemonId)) {
@@ -45,6 +45,19 @@ client.on(Events.MessageCreate, async (message) => {
       }
     } else {
       message.reply('Please provide a valid Pokémon ID.');
+    }
+  }
+});
+
+client.on(Events.MessageCreate, async (message) => {
+  if (message.content.toLocaleLowerCase() === '!joke') {
+    try {
+      const response = await axios.get('https://official-joke-api.appspot.com/random_joke');
+      const joke = `${response.data.setup} - ${response.data.punchline}`;
+      message.reply(joke);
+    } catch (error) {
+      console.error('Error fetching joke:', error);
+      message.reply('Sorry, I could not fetch a joke at this time.');
     }
   }
 });
