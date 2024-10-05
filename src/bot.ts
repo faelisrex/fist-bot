@@ -1,6 +1,5 @@
 // Intro to Discord.js
 import dotenv from 'dotenv';
-import axios from 'axios';
 import * as ping from './commands/utility/ping';
 import * as server from './commands/utility/server';
 import * as user from './commands/utility/user';
@@ -32,19 +31,6 @@ client.on(Events.MessageCreate, async (message) => {
   }
   await handlePokemonCommand(message);
   await handleJokeCommand(message);
-});
-
-client.on(Events.MessageCreate, async (message) => {
-  if (message.content.toLocaleLowerCase() === '!joke') {
-    try {
-      const response = await axios.get('https://official-joke-api.appspot.com/random_joke');
-      const joke = `${response.data.setup} - ${response.data.punchline}`;
-      message.reply(joke);
-    } catch (error) {
-      console.error('Error fetching joke:', error);
-      message.reply('Sorry, I could not fetch a joke at this time.');
-    }
-  }
 });
 
 // Create a collection to store commands
@@ -86,7 +72,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 client
   .login(process.env.DISCORD_TOKEN)
   .then(() => {
-    console.log('Logged in successfully');
+    console.log('Logged in successfully. Listening for messages...');
   })
   .catch((error) => {
     console.error('Error logging in:', error);
