@@ -5,6 +5,7 @@ import * as ping from './commands/utility/ping';
 import * as server from './commands/utility/server';
 import * as user from './commands/utility/user';
 import { handlePokemonCommand } from './commands/pokemon';
+import { handleJokeCommand } from './commands/joke';
 
 import { Client, Collection, Events, GatewayIntentBits, TextChannel } from 'discord.js';
 
@@ -30,6 +31,7 @@ client.on(Events.MessageCreate, async (message) => {
     message.reply('UNSA MAN');
   }
   await handlePokemonCommand(message);
+  await handleJokeCommand(message);
 });
 
 client.on(Events.MessageCreate, async (message) => {
