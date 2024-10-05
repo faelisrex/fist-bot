@@ -5,6 +5,7 @@ import * as server from './commands/slash/server';
 import * as user from './commands/slash/user';
 import { handlePokemonCommand } from './commands/pokemon';
 import { handleJokeCommand } from './commands/joke';
+import { handleAICommand } from './commands/ai';
 
 import { Client, Collection, Events, GatewayIntentBits, TextChannel } from 'discord.js';
 
@@ -31,6 +32,7 @@ client.on(Events.MessageCreate, async (message) => {
   }
   await handlePokemonCommand(message);
   await handleJokeCommand(message);
+  await handleAICommand(message);
 });
 
 // Create a collection to store commands
