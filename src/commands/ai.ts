@@ -11,7 +11,7 @@ export const handleAICommand = async (message: Message) => {
       const response = await axios.post('http://localhost:1234/v1/chat/completions', {
         model: 'lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF',
         messages: [
-          { role: 'system', content: 'Always answer in Cebuano Bisaya.' },
+          { role: 'system', content: 'Keep Answers Brief. Be Helpful!' },
           { role: 'user', content: userMessage },
         ],
         temperature: 0.7,
