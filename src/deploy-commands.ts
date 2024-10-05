@@ -2,9 +2,9 @@
 
 import { REST, Routes } from 'discord.js';
 import * as dotenv from 'dotenv';
-import * as ping from './commands/utility/ping';
-import * as server from './commands/utility/server';
-import * as user from './commands/utility/user';
+import * as ping from './commands/slash/ping';
+import * as server from './commands/slash/server';
+import * as user from './commands/slash/user';
 
 dotenv.config();
 
