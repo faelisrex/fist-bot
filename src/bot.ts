@@ -1,9 +1,9 @@
 // Intro to Discord.js
 import dotenv from 'dotenv';
 import axios from 'axios';
-import * as ping from '../commands/utility/ping';
-import * as server from '../commands/utility/server';
-import * as user from '../commands/utility/user';
+import * as ping from './commands/utility/ping';
+import * as server from './commands/utility/server';
+import * as user from './commands/utility/user';
 
 import { Client, Collection, Events, GatewayIntentBits, TextChannel } from 'discord.js';
 
