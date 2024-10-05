@@ -4,6 +4,7 @@ import axios from 'axios';
 import * as ping from './commands/utility/ping';
 import * as server from './commands/utility/server';
 import * as user from './commands/utility/user';
+import { handlePokemonCommand } from './commands/pokemon';
 
 import { Client, Collection, Events, GatewayIntentBits, TextChannel } from 'discord.js';
 
@@ -20,7 +21,7 @@ const client = new Client({
   ],
 }) as ExtendedClient;
 
-client.on(Events.MessageCreate, (message) => {
+client.on(Events.MessageCreate, async (message) => {
   console.log('Message received:', message.content); // Log every message received
   if (message.content.toLocaleLowerCase() === 'hello') {
     message.reply('hi');
@@ -28,25 +29,7 @@ client.on(Events.MessageCreate, (message) => {
   if (message.content.toLocaleLowerCase() === 'hoy') {
     message.reply('UNSA MAN');
   }
-});
-
-client.on(Events.MessageCreate, async (message) => {
-  const prefix = '!get pokemon ';
-  if (message.content.toLocaleLowerCase().startsWith(prefix)) {
-    const pokemonId: any = message.content.slice(prefix.length).trim();
-    if (!isNaN(pokemonId)) {
-      try {
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-        const pokemonName = response.data.name;
-        message.reply(`The name of Pokémon ${pokemonId} is ${pokemonName}`);
-      } catch (error) {
-        console.error('Error fetching Pokémon data:', error);
-        message.reply('Sorry, I could not fetch the Pokémon data.');
-      }
-    } else {
-      message.reply('Please provide a valid Pokémon ID.');
-    }
-  }
+  await handlePokemonCommand(message);
 });
 
 client.on(Events.MessageCreate, async (message) => {
